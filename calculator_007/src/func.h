@@ -2,7 +2,7 @@
 #define FUNC_H
 
 // Calculate modulus
-int mod(double x, double y) 
+int mod(double x, double y)
 {
 	return (int)x % (int)y;
 }

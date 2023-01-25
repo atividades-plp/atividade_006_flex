@@ -1,8 +1,7 @@
-calc: calc.y calc.l
-	bison -d calc.y
-	flex -o calc.l.c calc.l
-	gcc -o calc calc.l.c calc.tab.c -ll -lm 
+build: paku.y paku.lex
+	bison -d paku.y
+	flex -o paku.l.c paku.lex
+	gcc -o paku paku.l.c paku.tab.c -ll -lm 
 
 clean:
-	rm -f *.c *.h calc
-
+	rm -f *.c *.h paku

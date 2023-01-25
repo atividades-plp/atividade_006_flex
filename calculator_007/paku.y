@@ -1,12 +1,13 @@
 /*
-	Calculadora v.4 - Lê de arquivos ou linha de comando
-	Jucimar Jr
+	Atividade 007 - Calculadora com operações de mod e potenciação
 */
 
 %{
 #define YYSTYPE double
 #include <stdio.h>
-#include "func.h"
+#include <stdlib.h>
+#include <math.h>
+#include "src/func.h"
 extern FILE* yyin;
 
 void yyerror(char *s);
@@ -18,16 +19,18 @@ int yyparse();
 %token PLUS MINUS DIVIDE TIMES
 %token P_LEFT P_RIGHT
 %token MOD
+%token EXIT
 
 %left PLUS MINUS
-%left TIMES DIVIDE
-%left P_LEFT P_RIGHT
 %left MOD
+%left TIMES DIVIDE
+%left POW
+%left P_LEFT P_RIGHT
 
 %%
 
 STATEMENT:
-	STATEMENT EXPRESSION EOL {$$ = $2; printf("Resultado: %f\n", $2);}
+	STATEMENT EXPRESSION EOL {$$ = $2; printf("%f\n", $2);}
 	|
 	;
 
@@ -39,6 +42,7 @@ EXPRESSION:
 	|	EXPRESSION DIVIDE EXPRESSION {$$ = $1 / $3;}
 	|	P_LEFT EXPRESSION P_RIGHT {$$ = $2;}
 	|	EXPRESSION MOD EXPRESSION {$$ = mod($1, $3);}
+	|	EXPRESSION POW EXPRESSION {$$ = pow($1, $3);}
 	;
 
 

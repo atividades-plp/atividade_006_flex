@@ -1,11 +1,10 @@
 /*
-	Calculadora v.4 - Lê de arquivos ou linha de comando
-	Jucimar Jr
+	Atividade 007 - Calculadora com operações de mod e potenciação
 */
 
 %{
 #define YYSTYPE double
-#include "calc.tab.h" 
+#include "paku.tab.h" 
 #include <stdlib.h>
 
 void yyerror(char *s); 
@@ -22,6 +21,7 @@ void yyerror(char *s);
 [(]					{ return P_LEFT;}
 [)]					{ return P_RIGHT;}
 [%]					{ return MOD;}
+[\^]				{ return POW;}
 [[:space:]]			;
 .					{ yyerror("Undefined token\n"); }
 
